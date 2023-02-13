@@ -53,7 +53,7 @@ public class ElevatorSyncRunner {
         digitPanel.selectFloor(10);
         digitPanel.selectFloor(18);
         
-        // Create new floors 
+        // Create 5 new floors 
 
         for (int i = 20; i < digitPanel.getFloors(); i++) {
             Thread floor = new Thread(new Floor());

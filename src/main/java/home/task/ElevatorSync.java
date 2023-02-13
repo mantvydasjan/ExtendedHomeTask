@@ -38,10 +38,6 @@ public class ElevatorSync implements Runnable {
     }
 
     public void calcFloorSequence() {
-
-
-        System.out.println("seq started");
-
         // Get data from digit panel
         List<Integer> selectedFloors = digitPanel.getSelectedFloors();
         Collections.sort(selectedFloors);
@@ -60,6 +56,13 @@ public class ElevatorSync implements Runnable {
                 for (Integer selectedFloor : selectedFloors) {
                     if ((selectedFloor > currentFloor) && (!floorSequence.contains(selectedFloor))) {
                         floorSequence.add(selectedFloor);
+                        List<Integer> oldList = floorSequence.stream().toList();
+                        List<Integer> modifiableList = new ArrayList<Integer>(oldList);
+                        Collections.sort(modifiableList);
+                        floorSequence.clear();
+                        for (Integer floor : modifiableList) {
+                            floorSequence.add(floor);
+                        }
                     }
                 }
             }
@@ -68,6 +71,13 @@ public class ElevatorSync implements Runnable {
                 for (int i = selectedFloors.size() - 1; i >= 0; i--) {
                     if ((selectedFloors.get(i) < nextFloor) && (!floorSequence.contains(selectedFloors.get(i)))) {
                         floorSequence.add(selectedFloors.get(i));
+                        List<Integer> oldList = floorSequence.stream().toList();
+                        List<Integer> modifiableList = new ArrayList<Integer>(oldList);
+                        Collections.sort(modifiableList);
+                        floorSequence.clear();
+                        for (int n = modifiableList.size() - 1; n >= 0; n--) {
+                            floorSequence.add(modifiableList.get(n));
+                        }
                     }
                 }
             }
@@ -100,7 +110,7 @@ public class ElevatorSync implements Runnable {
     }
 
     private void move() {
-        
+
         // One by one
         for (Integer floor : this.floorSequence) {
             printToConsole();
@@ -116,9 +126,9 @@ public class ElevatorSync implements Runnable {
     }
 
     public void run() {
-        
+
         // Start elevator
-      
+
         while (true) {
             // Calculate new sequence
             calcFloorSequence();
