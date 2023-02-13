@@ -57,7 +57,7 @@ public class ElevatorSync implements Runnable {
                     if ((selectedFloor > currentFloor) && (!floorSequence.contains(selectedFloor))) {
                         floorSequence.add(selectedFloor);
                         List<Integer> oldList = floorSequence.stream().toList();
-                        List<Integer> modifiableList = new ArrayList<Integer>(oldList);
+                        List<Integer> modifiableList = new ArrayList<>(oldList);
                         Collections.sort(modifiableList);
                         floorSequence.clear();
                         for (Integer floor : modifiableList) {
@@ -69,10 +69,10 @@ public class ElevatorSync implements Runnable {
 
             case DOWN -> {
                 for (int i = selectedFloors.size() - 1; i >= 0; i--) {
-                    if ((selectedFloors.get(i) < nextFloor) && (!floorSequence.contains(selectedFloors.get(i)))) {
+                    if ((selectedFloors.get(i) < currentFloor) && (!floorSequence.contains(selectedFloors.get(i)))) {
                         floorSequence.add(selectedFloors.get(i));
                         List<Integer> oldList = floorSequence.stream().toList();
-                        List<Integer> modifiableList = new ArrayList<Integer>(oldList);
+                        List<Integer> modifiableList = new ArrayList<>(oldList);
                         Collections.sort(modifiableList);
                         floorSequence.clear();
                         for (int n = modifiableList.size() - 1; n >= 0; n--) {
