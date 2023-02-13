@@ -116,18 +116,14 @@ public class ElevatorSync implements Runnable {
     }
 
     public void run() {
-
+        
         // Start elevator
-
-        // do {
+      
         while (true) {
-            
             // Calculate new sequence
             calcFloorSequence();
-
             // And go!
             move();
-
             // Recalculate direction
             if (floorSequence.isEmpty()) {
                 calcDirection();
